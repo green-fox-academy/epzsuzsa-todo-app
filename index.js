@@ -16,7 +16,11 @@ switch (optionIndex) {
         prinUserManual();
         break;
     case "-l":
-        todoList.listTodoSS(todosFile);
+        if (todoList.todoss.length == 0) {
+            console.log("Nincs mára tennivalód"); 
+        } else {
+            todoList.listTodoSS(todosFile);
+        }
         break;
     default: console.log("mi van?");    
 }

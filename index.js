@@ -1,23 +1,45 @@
 import minimist from 'minimist';
-import fs from 'fs';
 import { ToDoSS } from './todoss.js';
 import { FileAccesToDo } from './FileAccesTodo.js';
+import { ToDo } from './todo.js';
 
 const args = minimist(process.argv);
 let optionIndex = process.argv[2];
 let optionValue = process.argv[3];
 
-console.log('process.argv', process.argv[2]);
-console.log('process.argv', process.argv[3]);
-console.log('minimist', args);
-
 let todosFile = new FileAccesToDo('todos.json');
-let todoInFile = todosFile.readTodosFromFile;
+let todoList = todosFile.readTodosFromFile();
 
+optionIndex = '-l';
 switch (optionIndex) {
     case undefined:
         prinUserManual();
+        break;
+    case "-l":
+        todoList.listTodoSS(todosFile);
+        break;
+    default: console.log("mi van?");    
 }
+
+
+
+function prinUserManual() {
+    console.log(" Parancssori Todo applikáció",'\n', 
+        "=============================",'\n', 
+        "Parancssori argumentumok:",'\n\n', 
+        "- l   Kilistázza a feladatokat",'\n', 
+    "- a   Új feladatot ad hozzá",'\n', 
+    "- r   Eltávolít egy feladatot",'\n', 
+    "- c   Teljesít egy feladatot",'\n');
+}
+
+
+
+
+
+
+
+
 
 // line replace
 // const fileContent = fs.readFileSync( 'valami.txt', 'utf-8' );
@@ -55,14 +77,3 @@ if (args.e === true) {
     console.log( args.newName );
 }
 */
-
-
-function prinUserManual() {
-    console.log(" Parancssori Todo applikáció",'\n', 
-        "=============================",'\n', 
-        "Parancssori argumentumok:",'\n\n', 
-        "- l   Kilistázza a feladatokat",'\n', 
-    "- a   Új feladatot ad hozzá",'\n', 
-    "- r   Eltávolít egy feladatot",'\n', 
-    "- c   Teljesít egy feladatot",'\n');
-}

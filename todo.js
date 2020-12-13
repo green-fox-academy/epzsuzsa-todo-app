@@ -4,11 +4,11 @@ TODO osztály és metódusai – egy pédány tartalmaz egy feladatot
 
 "use strict";
 
-class ToDo {
+export class ToDo {
     
-    constructor(descriptionOfToDo) {
+    constructor(descriptionOfToDo, completed = false) {
         this.descriptionOfToDo = descriptionOfToDo;
-        this.completed = false;
+        this.completed = completed;
     }
     
     isCompleted() {
@@ -22,7 +22,5 @@ class ToDo {
     printToDo() {
             return `[${this.completed ? 'x' : ' '}] ${this.descriptionOfToDo}`; 
     }
-
 }
 
-export { ToDo };

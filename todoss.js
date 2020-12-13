@@ -5,7 +5,7 @@ TODOS osztály és metódusai – az osztály tartalmaz egy TODO listát
 "use strict";
 import { ToDo } from './todo.js';
 
-class ToDoSS {
+export class ToDoSS {
 
     constructor() {
         this.todoss = [];
@@ -19,8 +19,16 @@ class ToDoSS {
         this.todoss = this.todoss.splice(indexOfTodo, 1);
     }
 
+    listTodoSS(todosFile) {
+        this.addToDo(new ToDo('Kutyát sétáltatni'));
+        this.addToDo(new ToDo('Tejet venni'));
+        this.addToDo(new ToDo('Megcsinálni a leckét'));
 
-    //readTodosFromFile 7 
+        todosFile.writeTodosToFile(this.todoss);   
+        console.log(this.printToDoSS());
+    }
+
+    //readTodosFromFile 
 
     //writeTodosToFile 
 
@@ -28,12 +36,10 @@ class ToDoSS {
     printToDoSS() {
         return this.todoss
             .map((todo, index) => `${index + 1}. ${todo.printToDo()}`)
-            .join('\n');
+            .join('\n');       
     }
 
     amountOfToDo() {
         return this.todoss.length;
     }
 }
-
-export { ToDoSS };

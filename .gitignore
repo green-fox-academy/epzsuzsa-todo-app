@@ -1,3 +1,10 @@
 .vscode
 node_modules
 .DS_Store
+node_modules
+todo_user_manual.txt
+package-lock.json
+package.json
+README.md
+todos.json
+README.md

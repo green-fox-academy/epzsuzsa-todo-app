@@ -10,31 +10,44 @@ let optionValue = process.argv[3];
 let todosFile = new FileAccesToDo('todos.json');
 let todoList = todosFile.readTodosFromFile();
 
-optionIndex = '-l';
 switch (optionIndex) {
     case undefined:
         prinUserManual();
         break;
     case "-l":
-        if (todoList.todoss.length == 0) {
-            console.log("Nincs mára tennivalód"); 
-        } else {
+        if (todoList.amountOfToDo()) {
+            console.log("Nincs mára tennivalód");
+        } else { // teszt!!!
+            todoList.addToDo(new ToDo('Kutyát sétáltatni'));
+            todoList.addToDo(new ToDo('Tejet venni'));
+            todoList.addToDo(new ToDo('Megcsinálni a leckét'));
+    
             todoList.listTodoSS(todosFile);
         }
         break;
-    default: console.log("mi van?");    
+    case "-a":
+        if (optionValue == undefined) {
+            console.log("Nem lehetséges új feladat hozzáadása: nincs megadva a feladat");
+        } else {
+            todoList.addToDo(new ToDo(optionValue));
+            todosFile.writeTodosToFile(todoList);
+            console.log("todoList ",todoList);
+        }
+        break;
+
+    default: console.log("mi van?");
 }
 
 
 
 function prinUserManual() {
-    console.log(" Parancssori Todo applikáció",'\n', 
-        "=============================",'\n', 
-        "Parancssori argumentumok:",'\n\n', 
-        "- l   Kilistázza a feladatokat",'\n', 
-    "- a   Új feladatot ad hozzá",'\n', 
-    "- r   Eltávolít egy feladatot",'\n', 
-    "- c   Teljesít egy feladatot",'\n');
+    console.log(" Parancssori Todo applikáció", '\n',
+        "=============================", '\n',
+        "Parancssori argumentumok:", '\n\n',
+        "- l   Kilistázza a feladatokat", '\n',
+        "- a   Új feladatot ad hozzá", '\n',
+        "- r   Eltávolít egy feladatot", '\n',
+        "- c   Teljesít egy feladatot", '\n');
 }
 
 

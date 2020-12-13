@@ -20,10 +20,7 @@ export class ToDoSS {
     }
 
     listTodoSS(todosFile) {
-        this.addToDo(new ToDo('Kutyát sétáltatni'));
-        this.addToDo(new ToDo('Tejet venni'));
-        this.addToDo(new ToDo('Megcsinálni a leckét'));
-
+ 
         todosFile.writeTodosToFile(this.todoss);   
         console.log(this.printToDoSS());
     }

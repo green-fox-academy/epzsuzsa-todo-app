@@ -17,16 +17,16 @@ export class ToDoSS {
 
     addToDoToFile(todoDescription, todosFile) {
         this.addToDo(new ToDo(todoDescription));
-        console.log("add to file: ", this.todoss);
         todosFile.writeTodosToFile(this.todoss);
     }
 
-    removeToDo(indexOfTodo) {
-        this.todoss = this.todoss.splice(indexOfTodo, 1);
+    removeToDoFromFile(indexOfTodo, todosFile) {
+        this.todoss= this.todoss.slice(0, indexOfTodo-1).concat(this.todoss.slice(indexOfTodo, this.todoss.length))
+        todosFile.writeTodosToFile(this.todoss);
     }
 
     listTodoSS(todosFile) {
-        todosFile.writeTodosToFile(this.todoss);
+        //todosFile.writeTodosToFile(this.todoss); A tesztnél kellett beírni
         console.log(this.printToDoSS());
     }
 

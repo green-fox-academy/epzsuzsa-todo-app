@@ -10,13 +10,13 @@ let optionValue = process.argv[3];
 let todosFile = new FileAccesToDo('todos.json');
 let todoList = todosFile.readTodosFromFile();
 
-/* 3 db Todo a teszthez
+//3 db Todo a teszthez
+/*
 todoList.addToDo(new ToDo('Kutyát sétáltatni'));
 todoList.addToDo(new ToDo('Tejet venni'));
 todoList.addToDo(new ToDo('Megcsinálni a leckét'));
 */
 
-//optionIndex = "-c";
 switch (optionIndex) {
     case undefined:
         prinUserManual();
@@ -36,20 +36,34 @@ switch (optionIndex) {
         }
         break;
     case "-c":
-        if (optionValue == undefined) {
-            console.log("Nem lehetséges a feladat végrehajtása, nem adtál meg indexet!");
-        } else if (!Number.isFinite(optionIndex)) {
-            console.log("Nem lehetséges a feladat végrehajtása, a megadott index nem szám!");
-        } else if (todoList.amountOfToDo() < optionValue || optionValue <= 0) {
-            console.log("Nem lehetséges a feladat végrehajtása: túlindexelési probléma adódott!");
-        } else {
+        if (!testOptionValue(optionValue)) {
             todoList.setCompletedTodo(optionValue, todosFile);
+        }
+        break;
+    case "-r":
+        if (!testOptionValue(optionValue)) {
+            todoList.removeToDoFromFile(optionValue, todosFile);
         }
         break;
 
     default: console.log("Nem támogatott argumentum!");
 }
 
+
+
+function testOptionValue(optionValue) {
+    if (optionValue == undefined) {
+        console.log("Nem lehetséges a feladat végrehajtása, nem adtál meg indexet!");
+        return true;
+    } else if (!Number.isInteger(Number(optionValue))) {
+        console.log("Nem lehetséges a feladat végrehajtása, a megadott index nem szám!");
+        return true;
+    } else if (todoList.amountOfToDo() < optionValue || optionValue <= 0) {
+        console.log("Nem lehetséges a feladat végrehajtása: túlindexelési probléma adódott!");
+        return true;
+    }
+    return false;
+}
 
 function prinUserManual() {
     console.log(" Parancssori Todo applikáció", '\n',
@@ -60,48 +74,3 @@ function prinUserManual() {
         "- r   Eltávolít egy feladatot", '\n',
         "- c   Teljesít egy feladatot", '\n');
 }
-
-
-
-
-
-
-
-
-
-// line replace
-// const fileContent = fs.readFileSync( 'valami.txt', 'utf-8' );
-// const lines = fileContent.split('\n');
-// lines[12] = "Macskát sétáltatni";
-// fs.writeFileSync( 'valami.txt', lines.join('\n') );
-
-// parse .txt content
-// const txtContent = fs.readFileSync( 'todos.txt', 'utf-8' );
-// let txtTodos = txtContent.split('\n');
-
-// txtTodos = txtTodos.map( ( todo ) => {
-//     const todoDetails = todo.split(';');
-//     return {
-//         id: parseInt( todoDetails[0] ),
-//         name: todoDetails[1],
-//         done: todoDetails[2] === 'true' ? true : false
-//     };
-// } );
-
-// console.log(txtTodos);
-
-// txtTodos = txtTodos.map( ( todo ) => {
-//     return `${ todo.id };${ todo.name };${ todo.done }`;
-// } );
-
-// fs.writeFileSync( 'todos.txt', txtTodos.join('\n') );
-
-
-
-//node index.js -e --oldName="Kutyát sétáltatni" --newName="Medvét simogatni"
-/*
-if (args.e === true) {
-    console.log( args.oldName );
-    console.log( args.newName );
-}
-*/

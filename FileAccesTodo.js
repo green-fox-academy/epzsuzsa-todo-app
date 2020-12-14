@@ -23,7 +23,6 @@ export class FileAccesToDo {
     }
 
     writeTodosToFile(todoss) {
-       //console.log('Write ', todoss);
         fs.writeFileSync(this.fileName, JSON.stringify(todoss, null, 4));
     }
 }

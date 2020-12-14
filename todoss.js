@@ -15,6 +15,13 @@ export class ToDoSS {
         this.todoss.push(todo);
     }
 
+    addToDoToFile(todoDescription, todosFile) {
+        this.addToDo(new ToDo(todoDescription));
+        console.log("add to file: ", this.todoss);
+        todosFile.writeTodosToFile(this.todoss);
+        console.log("todoList ",this.todoss);
+    }
+
     removeToDo(indexOfTodo) {
         this.todoss = this.todoss.splice(indexOfTodo, 1);
     }
@@ -25,10 +32,10 @@ export class ToDoSS {
         console.log(this.printToDoSS());
     }
 
-    //readTodosFromFile 
 
-    //writeTodosToFile 
+    setCompletedTodo(indexOfTodo, todosFile) 
 
+    
     
     printToDoSS() {
         return this.todoss

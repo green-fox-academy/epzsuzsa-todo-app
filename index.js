@@ -10,32 +10,41 @@ let optionValue = process.argv[3];
 let todosFile = new FileAccesToDo('todos.json');
 let todoList = todosFile.readTodosFromFile();
 
+/* 3 db Todo a teszthez
+todoList.addToDo(new ToDo('Kutyát sétáltatni'));
+todoList.addToDo(new ToDo('Tejet venni'));
+todoList.addToDo(new ToDo('Megcsinálni a leckét'));
+*/
+
+console.log("Todolist a switch előtt ", todoList.todoss);
+
 switch (optionIndex) {
     case undefined:
         prinUserManual();
         break;
     case "-l":
-        if (todoList.amountOfToDo()) {
+        if (!todoList.amountOfToDo()) {
             console.log("Nincs mára tennivalód");
-        } else { // teszt!!!
-            todoList.addToDo(new ToDo('Kutyát sétáltatni'));
-            todoList.addToDo(new ToDo('Tejet venni'));
-            todoList.addToDo(new ToDo('Megcsinálni a leckét'));
-    
+        } else {
             todoList.listTodoSS(todosFile);
         }
         break;
     case "-a":
         if (optionValue == undefined) {
-            console.log("Nem lehetséges új feladat hozzáadása: nincs megadva a feladat");
+            console.log("Nem lehetséges új feladat hozzáadása: nincs megadva a feladat!");
         } else {
-            todoList.addToDo(new ToDo(optionValue));
-            todosFile.writeTodosToFile(todoList);
-            console.log("todoList ",todoList);
+            todoList.addToDoToFile(optionValue, todosFile);
+        }
+        break;
+    case "-c":
+        if (optionValue == undefined) {
+            console.log("Nem lehetséges a feladat végrehajtása, nem adtál meg indexet!");
+        } else {
+            todoList.setCompletedTodo(optionValue, todosFile);
         }
         break;
 
-    default: console.log("mi van?");
+    default: console.log("Nem támogatott argumentum!");
 }
 
 

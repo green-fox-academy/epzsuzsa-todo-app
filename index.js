@@ -1,7 +1,7 @@
 import minimist from 'minimist';
 import { ToDoSS } from './todoss.js';
-import { FileAccesToDo } from './FileAccesTodo.js';
 import { ToDo } from './todo.js';
+import { FileAccesToDo } from './FileAccesTodo.js';
 
 const args = minimist(process.argv);
 let optionIndex = process.argv[2];
@@ -15,8 +15,6 @@ todoList.addToDo(new ToDo('Kutyát sétáltatni'));
 todoList.addToDo(new ToDo('Tejet venni'));
 todoList.addToDo(new ToDo('Megcsinálni a leckét'));
 */
-
-console.log("Todolist a switch előtt ", todoList.todoss);
 
 //optionIndex = "-c";
 switch (optionIndex) {
@@ -40,6 +38,8 @@ switch (optionIndex) {
     case "-c":
         if (optionValue == undefined) {
             console.log("Nem lehetséges a feladat végrehajtása, nem adtál meg indexet!");
+        } else if (!Number.isFinite(optionIndex)) {
+            console.log("Nem lehetséges a feladat végrehajtása, a megadott index nem szám!");
         } else if (todoList.amountOfToDo() < optionValue || optionValue <= 0) {
             console.log("Nem lehetséges a feladat végrehajtása: túlindexelési probléma adódott!");
         } else {
@@ -49,7 +49,6 @@ switch (optionIndex) {
 
     default: console.log("Nem támogatott argumentum!");
 }
-
 
 
 function prinUserManual() {

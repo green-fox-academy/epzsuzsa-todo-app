@@ -19,7 +19,6 @@ export class ToDoSS {
         this.addToDo(new ToDo(todoDescription));
         console.log("add to file: ", this.todoss);
         todosFile.writeTodosToFile(this.todoss);
-        console.log("todoList ",this.todoss);
     }
 
     removeToDo(indexOfTodo) {
@@ -27,20 +26,19 @@ export class ToDoSS {
     }
 
     listTodoSS(todosFile) {
- 
-        todosFile.writeTodosToFile(this.todoss);   
+        todosFile.writeTodosToFile(this.todoss);
         console.log(this.printToDoSS());
     }
 
+    setCompletedTodo(indexOfTodo, todosFile) {
+        this.todoss[indexOfTodo - 1].setCompleted();
+        todosFile.writeTodosToFile(this.todoss);
+    }
 
-    setCompletedTodo(indexOfTodo, todosFile) 
-
-    
-    
     printToDoSS() {
         return this.todoss
             .map((todo, index) => `${index + 1}. ${todo.printToDo()}`)
-            .join('\n');       
+            .join('\n');
     }
 
     amountOfToDo() {

@@ -11,10 +11,6 @@ export class ToDo {
         this.completed = completed;
     }
     
-    isCompleted() {
-        return this.completed;
-    }
-
     setCompleted() {
         this.completed = true;
     }

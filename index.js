@@ -18,6 +18,7 @@ todoList.addToDo(new ToDo('Megcsinálni a leckét'));
 
 console.log("Todolist a switch előtt ", todoList.todoss);
 
+//optionIndex = "-c";
 switch (optionIndex) {
     case undefined:
         prinUserManual();
@@ -39,6 +40,8 @@ switch (optionIndex) {
     case "-c":
         if (optionValue == undefined) {
             console.log("Nem lehetséges a feladat végrehajtása, nem adtál meg indexet!");
+        } else if (todoList.amountOfToDo() < optionValue || optionValue <= 0) {
+            console.log("Nem lehetséges a feladat végrehajtása: túlindexelési probléma adódott!");
         } else {
             todoList.setCompletedTodo(optionValue, todosFile);
         }

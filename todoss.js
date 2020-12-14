@@ -21,7 +21,7 @@ export class ToDoSS {
     }
 
     removeToDoFromFile(indexOfTodo, todosFile) {
-        this.todoss= this.todoss.slice(0, indexOfTodo-1).concat(this.todoss.slice(indexOfTodo, this.todoss.length))
+        this.todoss = this.todoss.slice(0, indexOfTodo-1).concat(this.todoss.slice(indexOfTodo, this.todoss.length))
         todosFile.writeTodosToFile(this.todoss);
     }
 
